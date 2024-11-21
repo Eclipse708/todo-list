@@ -1,5 +1,3 @@
-export {Project}
-
 class Project {
     constructor (name) {
         this.name = name;
@@ -18,3 +16,5 @@ class Project {
         return this.todos;
     }
 }
+
+export default Project

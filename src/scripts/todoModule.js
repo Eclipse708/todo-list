@@ -1,5 +1,3 @@
-export {Todo}
-
 class Todo {
    
     constructor (title,description, dueDate, priority, notes, checkList)  {
@@ -20,3 +18,5 @@ class Todo {
         this.setDueDate = newDueDate;
     }
 }
+
+export default Todo

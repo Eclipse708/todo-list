@@ -1,5 +1,4 @@
-import { Project } from "./projectModule";
-export {projectManager};
+import Project from "./projectModule";
 
 const projectManager = (() => {
     let projects = [];
@@ -19,3 +18,5 @@ const projectManager = (() => {
 
     return {addProject, removeProject, getProjects};
 })();
+
+export default projectManager;
