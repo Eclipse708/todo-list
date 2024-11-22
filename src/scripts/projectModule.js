@@ -1,10 +1,12 @@
+import Todo from "./todoModule";
 class Project {
     constructor (name) {
         this.name = name;
         this.todos = [];
     }
 
-    addTodo(todo) {
+    addTodo(newTodo) {
+        const todo = new Todo(newTodo);
         this.todos.push(todo);
     }
 

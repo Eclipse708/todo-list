@@ -6,6 +6,7 @@ const uiController = () => {
     const projectListElem = document.querySelector('#project-list');
     const todoListELem = document.querySelector('#todo-list');
     const addProjectBtn = document.querySelector('#add-project');
+    const addTodoBtn = document.querySelector('#add-todo');
 
     const renderProjects = () => {
         const projects = ProjectManager.getProjects();
@@ -25,8 +26,9 @@ const uiController = () => {
         todoListELem.innerHTML = '';
         
         project.getTodos().forEach((todo) => {
+            console.log(todo);
             const todoElem = document.createElement('div');
-            todoElem.textContent = todo.title + '-' + todo.dueDate;
+            todoElem.textContent = `${todo.title} - Due: ${todo.dueDate}`;
             todoListELem.appendChild(todoElem);
         });
     };
@@ -38,9 +40,28 @@ const uiController = () => {
             renderProjects();
         });
     }
+
+    const addTodoListener = () => {
+        addTodoBtn.addEventListener('click', () => {
+            const project = projectManager.getProjects()[0];
+            const todoTitle = prompt('Enter todo title');
+            if (todoTitle) {
+                const newTodo = {
+                    title: todoTitle,
+                    description: 'Test desc',
+                    dueDate: '2024-12-31',
+                    priority: 'High',
+                    notes: 'Test notes'
+                };
+            project.addTodo(newTodo);
+            renderTodos(project);
+            }
+        });
+    }
     const init = () => {
         renderProjects();
         addProjectListener();
+        addTodoListener();
     }
 
     return {
