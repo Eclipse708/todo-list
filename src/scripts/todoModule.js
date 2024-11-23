@@ -5,7 +5,6 @@ class Todo {
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
-        this.notes = notes;
         this.completed = false;
     }
 

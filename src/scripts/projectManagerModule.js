@@ -4,6 +4,7 @@ const projectManager = (() => {
     let projects = [];
     const defaultProject = new Project('Default');
     projects.push(defaultProject);
+    let currentProject = projects[0];
 
     const addProject = (name) => {
         const newProject = new Project(name);
@@ -16,7 +17,13 @@ const projectManager = (() => {
 
     const getProjects = () => projects;
 
-    return {addProject, removeProject, getProjects};
+    const activeProject = (projectName) => {
+       const projectIndex = projects.findIndex(project => project.name === projectName);
+       currentProject = projects[projectIndex];
+    //    console.log(currentProject);
+    }
+
+    return {addProject, removeProject, getProjects, activeProject, currentProject};
 })();
 
 export default projectManager;

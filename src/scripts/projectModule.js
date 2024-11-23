@@ -6,7 +6,7 @@ class Project {
     }
 
     addTodo(newTodo) {
-        const todo = new Todo(newTodo);
+        const todo = new Todo(newTodo.title, newTodo.description, newTodo.dueDate, newTodo.priority);
         this.todos.push(todo);
     }
 
