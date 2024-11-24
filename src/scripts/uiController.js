@@ -1,6 +1,4 @@
-import projectManager from "./projectManagerModule";
 import ProjectManager from "./projectManagerModule";
-
 
 const uiController = () => {
     const projectListElem = document.querySelector('#project-list');
@@ -8,8 +6,11 @@ const uiController = () => {
     const addProjectBtn = document.querySelector('#add-project');
     const addTodoBtn = document.querySelector('#add-todo');
     const modal = document.querySelector('#todo-modal');
+    const projectModal = document.querySelector('#project-modal');
     const closeBtn = document.querySelector('.close-button');
+    const closeProjectBtn = document.querySelector('.close-project-modal-btn');
     const todoForm = document.querySelector('#todo-form');
+    const projectForm = document.querySelector('#project-form');
 
     const renderProjects = () => {
         const projects = ProjectManager.getProjects();
@@ -19,8 +20,8 @@ const uiController = () => {
             const projectElem = document.createElement('div');
             projectElem.textContent = project.name;
             projectElem.addEventListener('click', () => {
+                ProjectManager.activeProject(project.name);
                 renderTodos(project);
-                projectManager.activeProject(project.name);
             });
             projectListElem.appendChild(projectElem);
         });
@@ -30,28 +31,80 @@ const uiController = () => {
         todoListELem.innerHTML = '';
         
         project.getTodos().forEach((todo) => {
+            const ul = document.createElement('ul');
+            const li = document.createElement('li');
             const todoElem = document.createElement('div');
+            const todoOptions = document.createElement('div');
+            const todoOptionsBtn = document.createElement('button');
+            const todoEdit = document.createElement('button');
+            const todoDel = document.createElement('button');
+
+            todoOptionsBtn.textContent = '⋮';
+            todoEdit.textContent = 'Edit';
+            todoDel.textContent = 'Delete';
+
+            todoOptions.classList.add('dropdown');
+            todoOptionsBtn.classList.add('options-btn');
+            todoOptions.classList.add('dropdown-menu');
+            
+            todoOptions.appendChild(todoEdit);
+            todoOptions.appendChild(todoDel);
+
+            todoOptions.style.display = 'none';
+
+            todoOptionsBtn.addEventListener('click', () => {
+                todoOptions.style.display = todoOptions.style.display == 'none' ? 'block' : 'none';
+            });
+
+
+            todoDel.addEventListener('click', () => {
+                console.log('clicked');
+                
+            });
+
             todoElem.textContent = `${todo.title} - Due: ${todo.dueDate} 
                                     Description: ${todo.description} Priority: ${todo.priority}`;
-            todoListELem.appendChild(todoElem);
+            
+            li.appendChild(todoElem);
+            li.appendChild(todoOptionsBtn);
+            li.appendChild(todoOptions);
+
+            ul.appendChild(li);
+            todoListELem.appendChild(ul);
         });
     };
 
     const addProjectListener = () => {
         addProjectBtn.addEventListener('click', () => {
-            const projectName = prompt('Enter project name');
-            projectManager.addProject(projectName);
-            renderProjects();
+            projectModal.style.display = 'block';
         });
+
+        closeProjectBtn.addEventListener('click', () => {
+            projectModal.style.display = 'none';
+        });
+    }
+
+    const addProjectItemListener = () => {
+        projectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(projectForm);
+            const projectTitle = formData.get('title');
+
+            ProjectManager.addProject(projectTitle);
+            renderProjects();
+            projectModal.style.display = 'none';
+            // projectForm.reset();
+        })
     }
 
     const addTodoListener = () => {
         addTodoBtn.addEventListener('click', () => {
             modal.style.display = 'block'; 
+        });
 
-            closeBtn.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
         });
     }
 
@@ -59,8 +112,7 @@ const uiController = () => {
         todoForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const project = projectManager.currentProject;
-        console.log(project);
+        const project = ProjectManager.getCurrentProject();
         const formData = new FormData(todoForm);
         const todoTitle = formData.get('title');
         const todoDescription = formData.get('description');
@@ -77,7 +129,7 @@ const uiController = () => {
         project.addTodo(newTodo);
         renderTodos(project);
         modal.style.display = 'none';
-        todoForm.reset(); //resets values in modal
+        // todoForm.reset(); //resets values in modal
         });
     }
 
@@ -86,6 +138,7 @@ const uiController = () => {
         addProjectListener();
         addTodoListener();
         addTodoItemListener();
+        addProjectItemListener();
     }
 
     return {

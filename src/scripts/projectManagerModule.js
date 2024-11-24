@@ -20,10 +20,12 @@ const projectManager = (() => {
     const activeProject = (projectName) => {
        const projectIndex = projects.findIndex(project => project.name === projectName);
        currentProject = projects[projectIndex];
-    //    console.log(currentProject);
+       return currentProject;
     }
 
-    return {addProject, removeProject, getProjects, activeProject, currentProject};
+    const getCurrentProject = () => currentProject;
+
+    return {addProject, removeProject, getProjects, activeProject, getCurrentProject};
 })();
 
 export default projectManager;
