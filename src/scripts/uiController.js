@@ -1,3 +1,4 @@
+import projectManager from "./projectManagerModule";
 import ProjectManager from "./projectManagerModule";
 
 const uiController = () => {
@@ -56,18 +57,29 @@ const uiController = () => {
                 todoOptions.style.display = todoOptions.style.display == 'none' ? 'block' : 'none';
             });
 
-
-            todoDel.addEventListener('click', () => {
-                console.log('clicked');
-                
-            });
-
             todoElem.textContent = `${todo.title} - Due: ${todo.dueDate} 
                                     Description: ${todo.description} Priority: ${todo.priority}`;
             
             li.appendChild(todoElem);
             li.appendChild(todoOptionsBtn);
             li.appendChild(todoOptions);
+
+            todoDel.addEventListener('click', () => {
+                project.removeTodo(todo.title);
+                renderTodos(project);
+            });
+
+            todoEdit.addEventListener('click', () => {
+                const updateTodo = {
+                    title: 'rand',
+                    description: 'Rand2',
+                    dueDate: 'Rand3',
+                    priority: 'Rand4'
+                }
+
+                project.editTodo(todo, updateTodo);
+                renderTodos(project);
+            });
 
             ul.appendChild(li);
             todoListELem.appendChild(ul);

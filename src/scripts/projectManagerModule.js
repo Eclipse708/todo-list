@@ -12,7 +12,7 @@ const projectManager = (() => {
     };
 
     const removeProject = (name) => {
-        projects = projects.filter(project => project.name != name);
+        projects = projects.filter(project => project.name !== name);
     };
 
     const getProjects = () => projects;
