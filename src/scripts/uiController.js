@@ -18,13 +18,60 @@ const uiController = () => {
         projectListElem.innerHTML = '';
 
         projects.forEach((project) => {
+            const projectContainer = document.createElement('div');
             const projectElem = document.createElement('div');
+            const projectOptions = document.createElement('div');
+            const projectOptionsBtn = document.createElement('button');
+            const renameProjectBtn = document.createElement('button');
+            const removeProjectBtn = document.createElement('button');
+            
+            projectOptionsBtn.textContent = '⋮';
+            renameProjectBtn.textContent = 'Rename';
+            removeProjectBtn.textContent = 'Remove'; 
             projectElem.textContent = project.name;
+
+            projectOptions.classList.add('dropdown');
+            projectOptionsBtn.classList.add('project-options-btn');
+            projectOptions.classList.add('project-options-dropdown-menu');
+            projectContainer.classList.add('project-container');
+            
+            projectOptions.appendChild(renameProjectBtn);
+            projectOptions.appendChild(removeProjectBtn);
+
+            projectOptions.style.display = 'none';
+
+            projectOptionsBtn.addEventListener('click', () => {
+                projectOptions.style.display = projectOptions.style.display == 'none' ? 'block' : 'none';
+            });
+
+            document.addEventListener('click', (event) => {
+                if (event.target != document.querySelector('.project-options-dropdown-menu') &&
+                event.target != document.querySelector('.project-options-btn')) {
+                    projectOptions.style.display = 'none';
+                }
+            });
+
+            removeProjectBtn.addEventListener('click', () => {
+                ProjectManager.removeProject(project.name);
+                renderProjects();
+            });
+
+            renameProjectBtn.addEventListener('click', () => {
+                let newName = prompt('Enter new name');
+                ProjectManager.renameProject(project.name, newName);
+                renderProjects();
+            });
+
+            projectContainer.appendChild(projectElem);
+            projectContainer.appendChild(projectOptionsBtn);
+            projectContainer.appendChild(projectOptions);
+
             projectElem.addEventListener('click', () => {
                 ProjectManager.activeProject(project.name);
                 renderTodos(project);
             });
-            projectListElem.appendChild(projectElem);
+
+            projectListElem.appendChild(projectContainer);
         });
     }
 
@@ -55,6 +102,13 @@ const uiController = () => {
 
             todoOptionsBtn.addEventListener('click', () => {
                 todoOptions.style.display = todoOptions.style.display == 'none' ? 'block' : 'none';
+            });
+
+            document.addEventListener('click', (event) => {
+                if (event.target != document.querySelector('.dropdown-menu') &&
+                event.target != document.querySelector('.options-btn')) {
+                    todoOptions.style.display = 'none';
+                }
             });
 
             todoElem.textContent = `${todo.title} - Due: ${todo.dueDate} 
@@ -106,7 +160,7 @@ const uiController = () => {
             ProjectManager.addProject(projectTitle);
             renderProjects();
             projectModal.style.display = 'none';
-            // projectForm.reset();
+            projectForm.reset();
         })
     }
 

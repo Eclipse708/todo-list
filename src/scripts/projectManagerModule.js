@@ -15,6 +15,14 @@ const projectManager = (() => {
         projects = projects.filter(project => project.name !== name);
     };
 
+    const renameProject = (baseProjectName, newProjectName) => {
+        const projectIndex = projects.findIndex(project => project.name == baseProjectName);
+        // console.log(projects[projectIndex].name);
+        // console.log(newProjectName)
+        // console.log(baseProjectName)
+        projects[projectIndex].name = newProjectName;
+    }
+
     const getProjects = () => projects;
 
     const activeProject = (projectName) => {
@@ -25,7 +33,14 @@ const projectManager = (() => {
 
     const getCurrentProject = () => currentProject;
 
-    return {addProject, removeProject, getProjects, activeProject, getCurrentProject};
+    return {
+        addProject, 
+        removeProject, 
+        getProjects, 
+        activeProject, 
+        getCurrentProject,
+        renameProject,
+    };
 })();
 
 export default projectManager;
