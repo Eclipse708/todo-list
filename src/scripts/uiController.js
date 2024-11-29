@@ -8,8 +8,10 @@ const uiController = () => {
     const addTodoBtn = document.querySelector('#add-todo');
     const modal = document.querySelector('#todo-modal');
     const projectModal = document.querySelector('#project-modal');
+    const editTodoModal = document.querySelector('#edit-todo-modal');
     const closeBtn = document.querySelector('.close-button');
     const closeProjectBtn = document.querySelector('.close-project-modal-btn');
+    const editCloseBtn = document.querySelector('.edit-close-button');
     const todoForm = document.querySelector('#todo-form');
     const projectForm = document.querySelector('#project-form');
 
@@ -86,6 +88,10 @@ const uiController = () => {
             const todoOptionsBtn = document.createElement('button');
             const todoEdit = document.createElement('button');
             const todoDel = document.createElement('button');
+            const todoLeft = document.createElement('div');
+            const todoRight = document.createElement('div');
+            const date = document.createElement('span');
+            const priority = document.createElement('span'); 
 
             todoOptionsBtn.textContent = '⋮';
             todoEdit.textContent = 'Edit';
@@ -94,6 +100,7 @@ const uiController = () => {
             todoOptions.classList.add('dropdown');
             todoOptionsBtn.classList.add('options-btn');
             todoOptions.classList.add('dropdown-menu');
+            date.classList.add('date');
             
             todoOptions.appendChild(todoEdit);
             todoOptions.appendChild(todoDel);
@@ -111,11 +118,24 @@ const uiController = () => {
                 }
             });
 
-            todoElem.textContent = `${todo.title} - Due: ${todo.dueDate} 
-                                    Description: ${todo.description} Priority: ${todo.priority}`;
+            todoLeft.innerHTML = `<strong>${todo.title}</strong><br>${todo.description}`;
+            priority.innerHTML = `${todo.priority}`;
+            date.innerHTML = `${todo.dueDate}`;
+
+            if (todo.priority === 'low') {
+                priority.classList.add('priority-low');
+            } else if (todo.priority === 'medium') {
+                priority.classList.add('priority-medium');
+            } else if (todo.priority === 'high') {
+                priority.classList.add('priority-high');
+            }
+
+            todoRight.appendChild(priority);
+            todoRight.appendChild(date);
+            todoRight.appendChild(todoOptionsBtn);
             
-            li.appendChild(todoElem);
-            li.appendChild(todoOptionsBtn);
+            li.appendChild(todoLeft);
+            li.appendChild(todoRight);
             li.appendChild(todoOptions);
 
             todoDel.addEventListener('click', () => {
@@ -124,15 +144,22 @@ const uiController = () => {
             });
 
             todoEdit.addEventListener('click', () => {
-                const updateTodo = {
-                    title: 'rand',
-                    description: 'Rand2',
-                    dueDate: 'Rand3',
-                    priority: 'Rand4'
-                }
+                
+                editTodoModal.style.display = 'block'; 
+            
+                editCloseBtn.addEventListener('click', () => {
+                    editTodoModal.style.display = 'none';
+                });
 
-                project.editTodo(todo, updateTodo);
-                renderTodos(project);
+                // const updateTodo = {
+                //     title: 'rand',
+                //     description: 'Rand2',
+                //     dueDate: 'Rand3',
+                //     priority: 'Rand4'
+                // }
+
+                // project.editTodo(todo, updateTodo);
+                // renderTodos(project);
             });
 
             ul.appendChild(li);
@@ -198,6 +225,8 @@ const uiController = () => {
         // todoForm.reset(); //resets values in modal
         });
     }
+
+    // Create todo edit function.
 
     const init = () => {
         renderProjects();

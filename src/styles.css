@@ -1,3 +1,12 @@
+:root {
+    --muave: #d3b1c2;
+    --lavender: #c197d2;
+    --deep-purple:#211522;
+    --orchid: #613659;
+    --border-dark: #374958;
+    --font-bold: 600;
+    --font-white: #fff;
+}
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,7 +28,7 @@ li {
     display: flex;
     align-items: center;
     justify-content: space-between;  
-    border: solid 1.5px #374958;
+    border: solid 1.5px var(--border-dark);
     border-radius: 4px;
     padding-left: 10px;
     padding-right: 10px;
@@ -140,7 +149,7 @@ button:hover {
 }
 
 .project-options-btn:hover {
-    font-weight: 600;
+    font-weight: var(--font-bold);
 }
 
 .project-options-dropdown-menu button {
@@ -169,13 +178,22 @@ button:hover {
 
 #todo-list div button {
     margin-top: 0px;
-    background-color: #fff;
     color: #000000;
+}
+
+#todo-list div button:hover {
+    font-weight: 0px;
 }
 
 /* #todo-list div:hover {
     background-color: #dfe6e9;
 } */
+
+.date {
+    border: solid 1.5px var(--border-dark);
+    border-radius: 10px;
+    padding: 3px 6px;
+}
 
 .modal {
     display: none;
@@ -198,7 +216,8 @@ button:hover {
     border-radius: 10px;
 }
   
-.close-button {
+.close-button, 
+.edit-close-button {
     color: #aaa;
     float: right;
     font-size: 28px;
@@ -206,7 +225,9 @@ button:hover {
 }
   
 .close-button:hover,
-.close-button:focus {
+.close-button:focus,
+.edit-close-button:hover,
+.edit-close-button:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
@@ -231,4 +252,31 @@ form select {
 .project-modal-btns {
     display: flex;
     gap: 12px;    
+}
+
+.priority-low {
+    border-radius: 10px;
+    padding: 3px 6px;
+    margin-right: 10px;
+    background-color: var(--lavender);
+    font-weight: var(--font-bold);
+    color: var(--font-white);
+}
+
+.priority-medium {
+    border-radius: 10px;
+    padding: 3px 6px;
+    margin-right: 10px;
+    background-color: var(--orchid);
+    font-weight: var(--font-bold);
+    color: var(--font-white);
+}
+
+.priority-high {
+    border-radius: 10px;
+    padding: 3px 6px;
+    margin-right: 10px;
+    background-color: var(--deep-purple);
+    font-weight: var(--font-bold);
+    color: var(--font-white);
 }

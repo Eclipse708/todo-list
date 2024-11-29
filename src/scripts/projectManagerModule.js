@@ -16,6 +16,10 @@ const projectManager = (() => {
     };
 
     const renameProject = (baseProjectName, newProjectName) => {
+        if (newProjectName === '') {
+            return 1;
+        }
+        
         const projectIndex = projects.findIndex(project => project.name == baseProjectName);
         // console.log(projects[projectIndex].name);
         // console.log(newProjectName)
