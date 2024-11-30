@@ -1,21 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 :root {
     --muave: #d3b1c2;
     --lavender: #c197d2;
-    --deep-purple:#211522;
+    --deep-purple: #211522;
     --orchid: #613659;
     --border-dark: #374958;
     --font-bold: 600;
     --font-white: #fff;
+    --font-black: #000;
+    --font-light-gray: #aaa;
+    --bg-light: #f4f4f4;
+    --bg-dark: #2c3e50;
+    --bg-lighter: #f1f1f1;
+    --primary-red: #e74c3c;
+    --primary-red-dark: #c0392b;
+    --box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    --border-radius: 4px;
+    --modal-bg: rgba(0, 0, 0, 0.5);
+    --modal-width: 50%;
+    --modal-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    --font-heading: "Roboto Mono", monospace;
+    --font-description: "Inconsolata", serif;
 }
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+h2 {
+    font-family: var(--font-heading);
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: var(--font-description);
+    background-color: var(--bg-light);
     color: #333;
 }
 
@@ -27,25 +48,26 @@ ul {
 li {
     display: flex;
     align-items: center;
-    justify-content: space-between;  
+    justify-content: space-between;
     border: solid 1.5px var(--border-dark);
-    border-radius: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
+    border-radius: var(--border-radius);
+    padding: 0 10px;
 }
 
 button {
-    background-color: #e74c3c;
-    color: white;
+    background-color: var(--primary-red);
+    color: var(--font-white);
     padding: 10px;
     border: none;
     cursor: pointer;
     margin-top: 20px;
     width: 100%;
+    font-family: var(--font-heading);
+    font-weight: var(--font-bold);
 }
 
 button:hover {
-    background-color: #c0392b;
+    background-color: var(--primary-red-dark);
 }
 
 .options-btn {
@@ -53,20 +75,16 @@ button:hover {
     border: none;
     cursor: pointer;
     font-size: 16px;
-    color: #000000;
+    color: var(--font-black);
     width: 0;
     margin-top: 0;
-}
-
-.options-btn:hover {
-    background: none;
 }
 
 .dropdown-menu {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: var(--bg-lighter);
+    box-shadow: var(--box-shadow);
     z-index: 1;
     right: 0;
     bottom: 1.9rem;
@@ -92,8 +110,8 @@ button:hover {
 }
 
 .sidebar {
-    background-color: #2c3e50;
-    color: white;
+    background-color: var(--bg-dark);
+    color: var(--font-white);
     padding: 20px;
     width: 250px;
 }
@@ -103,19 +121,8 @@ button:hover {
     margin-bottom: 20px;
 }
 
-#project-list {
-    position: relative;
-}
-
 #project-list div:hover {
     background-color: #34495e;
-}
-
-#project-list div button {
-    margin-top: 0px;
-    background-color: #fff;
-    color: #000000;
-    width: 20px;
 }
 
 .project-container {
@@ -128,16 +135,12 @@ button:hover {
 
 .project-options-dropdown-menu {
     position: absolute;
-    background-color: #f1f1f1;
-    color:#000000;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    background-color: var(--bg-lighter);
+    color: var(--font-black);
+    box-shadow: var(--box-shadow);
     z-index: 1;
     right: 0;
     bottom: 2.1rem;
-}
-
-.project-options-dropdown-menu:hover {
-    background: white !important;
 }
 
 .project-options-btn {
@@ -145,22 +148,13 @@ button:hover {
     margin-top: 0;
     cursor: pointer;
     background: none !important;
-    color: white !important;
+    color: var(--font-white);
 }
 
 .project-options-btn:hover {
     font-weight: var(--font-bold);
 }
 
-.project-options-dropdown-menu button {
-    display: block;
-    width: 100% !important;
-    padding: 8px;
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-}
 .main-content {
     flex-grow: 1;
     background-color: #ecf0f1;
@@ -172,26 +166,9 @@ button:hover {
     margin-bottom: 20px;
 }
 
-#todo-list {
-   position: relative;
-}
-
-#todo-list div button {
-    margin-top: 0px;
-    color: #000000;
-}
-
-#todo-list div button:hover {
-    font-weight: 0px;
-}
-
-/* #todo-list div:hover {
-    background-color: #dfe6e9;
-} */
-
 .date {
     border: solid 1.5px var(--border-dark);
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     padding: 3px 6px;
 }
 
@@ -203,41 +180,40 @@ button:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
+    background-color: var(--modal-bg);
+}
   
 .modal-content {
-    background-color: #fff;
+    background-color: var(--font-white);
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: var(--modal-width);
+    box-shadow: var(--modal-box-shadow);
     border-radius: 10px;
 }
-  
+
 .close-button, 
 .edit-close-button {
-    color: #aaa;
+    color: var(--font-light-gray);
     float: right;
     font-size: 28px;
-    font-weight: bold;
+    font-weight: var(--font-bold);
 }
-  
+
 .close-button:hover,
 .close-button:focus,
 .edit-close-button:hover,
 .edit-close-button:focus {
-    color: black;
-    text-decoration: none;
+    color: var(--font-black);
     cursor: pointer;
 }
-  
+
 form label {
     display: block;
     margin: 10px 0 5px;
 }
-  
+
 form input,
 form textarea,
 form select {
@@ -245,8 +221,7 @@ form select {
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    border-radius: var(--border-radius);
 }
 
 .project-modal-btns {
@@ -255,28 +230,40 @@ form select {
 }
 
 .priority-low {
-    border-radius: 10px;
-    padding: 3px 6px;
-    margin-right: 10px;
     background-color: var(--lavender);
     font-weight: var(--font-bold);
     color: var(--font-white);
+    padding: 3px 6px;
+    margin-right: 10px;
+    border-radius: var(--border-radius);
 }
 
 .priority-medium {
-    border-radius: 10px;
-    padding: 3px 6px;
-    margin-right: 10px;
     background-color: var(--orchid);
     font-weight: var(--font-bold);
     color: var(--font-white);
+    padding: 3px 6px;
+    margin-right: 10px;
+    border-radius: var(--border-radius);
 }
 
 .priority-high {
-    border-radius: 10px;
-    padding: 3px 6px;
-    margin-right: 10px;
     background-color: var(--deep-purple);
     font-weight: var(--font-bold);
     color: var(--font-white);
+    padding: 3px 6px;
+    margin-right: 10px;
+    border-radius: var(--border-radius);
+}
+
+.todo-title {
+    font-weight: var(--font-bold);
+}
+
+.todo-description {
+    width: 59vw;
+}
+
+.options-btn:hover {
+    background: none;
 }

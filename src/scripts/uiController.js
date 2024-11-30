@@ -14,6 +14,7 @@ const uiController = () => {
     const editCloseBtn = document.querySelector('.edit-close-button');
     const todoForm = document.querySelector('#todo-form');
     const projectForm = document.querySelector('#project-form');
+    const editTodoForm = document.querySelector('#edit-todo-form');
 
     const renderProjects = () => {
         const projects = ProjectManager.getProjects();
@@ -107,18 +108,22 @@ const uiController = () => {
 
             todoOptions.style.display = 'none';
 
-            todoOptionsBtn.addEventListener('click', () => {
+            todoOptionsBtn.addEventListener('click', (e) => {
                 todoOptions.style.display = todoOptions.style.display == 'none' ? 'block' : 'none';
+                e.stopPropagation();
             });
 
             document.addEventListener('click', (event) => {
-                if (event.target != document.querySelector('.dropdown-menu') &&
-                event.target != document.querySelector('.options-btn')) {
+                if (event.target.closest != document.querySelector('.dropdown-menu') 
+                && event.target.closest != document.querySelector('.options-btn')) {
                     todoOptions.style.display = 'none';
                 }
             });
 
-            todoLeft.innerHTML = `<strong>${todo.title}</strong><br>${todo.description}`;
+            todoLeft.innerHTML = `  <div class="todo-heading">
+                                    <div class="todo-title">${todo.title}</div>
+                                    <div class="todo-description">${todo.description}</div>
+                                    </div>`;
             priority.innerHTML = `${todo.priority}`;
             date.innerHTML = `${todo.dueDate}`;
 
@@ -151,15 +156,7 @@ const uiController = () => {
                     editTodoModal.style.display = 'none';
                 });
 
-                // const updateTodo = {
-                //     title: 'rand',
-                //     description: 'Rand2',
-                //     dueDate: 'Rand3',
-                //     priority: 'Rand4'
-                // }
-
-                // project.editTodo(todo, updateTodo);
-                // renderTodos(project);
+                 updateTodo(todo);
             });
 
             ul.appendChild(li);
@@ -227,6 +224,30 @@ const uiController = () => {
     }
 
     // Create todo edit function.
+    const updateTodo = (todo) => {
+        editTodoForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const project = ProjectManager.getCurrentProject();
+            const editFormData = new FormData(editTodoForm);
+            const editTitle = editFormData.get('edit-title');
+            const editDescription = editFormData.get('edit-description');
+            const editDueDate = editFormData.get('edit-due-date');
+            const editPriority = editFormData.get('edit-priority');
+    
+            const updatedTodo = {
+                        title: editTitle,
+                        description: editDescription,
+                        dueDate: editDueDate,
+                        priority: editPriority
+                    }
+    
+            project.editTodo(todo, updatedTodo);
+            renderTodos(project);
+            editTodoModal.style.display = 'none';
+            // todoForm.reset(); //resets values in modal
+        });
+    }
 
     const init = () => {
         renderProjects();
