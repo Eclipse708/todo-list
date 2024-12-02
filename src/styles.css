@@ -7,9 +7,11 @@
     --orchid: #613659;
     --border-dark: #374958;
     --font-bold: 600;
+    --font-sm: 14px;
     --font-white: #fff;
     --font-black: #000;
     --font-light-gray: #aaa;
+    --font-dark-gray: rgb(101, 101, 101);
     --bg-light: #f4f4f4;
     --bg-dark: #2c3e50;
     --bg-lighter: #f1f1f1;
@@ -119,10 +121,6 @@ button:hover {
 .sidebar h2 {
     font-size: 1.5em;
     margin-bottom: 20px;
-}
-
-#project-list div:hover {
-    background-color: #34495e;
 }
 
 .project-container {
@@ -262,8 +260,64 @@ form select {
 
 .todo-description {
     width: 59vw;
+    font-size: var(--font-sm);
 }
 
 .options-btn:hover {
     background: none;
+}
+
+#project-list,
+#todo-list {
+    position: relative;
+}
+
+.project-options-buttons,
+.todo-edit-options-buttons {
+    background: none;
+    color: var(--font-black);
+    margin-top: 0;
+    font-weight: normal;
+}
+
+.project-options-buttons:hover {
+    color: var(--font-white);
+}
+
+.todo-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border: 2px solid var(--border-dark);
+    border-radius: 50%;
+    background-color: white;
+    appearance: none;
+    display: inline-block;
+    margin-right: 10px;
+    position: relative;
+}
+
+.todo-checkbox:checked {
+    background-color: var(--orchid);
+    border-color: var(--orchid);
+}
+
+.todo-checkbox:checked::after {
+    content: '✔';
+    font-size: 14px;
+    color: var(--font-white);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.todo-left {
+    display: flex;
+}
+
+.completed .todo-title,
+.completed .todo-description {
+    text-decoration: line-through;
+    color: var(--font-dark-gray);
 }

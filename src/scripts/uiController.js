@@ -37,6 +37,8 @@ const uiController = () => {
             projectOptionsBtn.classList.add('project-options-btn');
             projectOptions.classList.add('project-options-dropdown-menu');
             projectContainer.classList.add('project-container');
+            renameProjectBtn.classList.add('project-options-buttons');
+            removeProjectBtn.classList.add('project-options-buttons');
             
             projectOptions.appendChild(renameProjectBtn);
             projectOptions.appendChild(removeProjectBtn);
@@ -80,7 +82,7 @@ const uiController = () => {
 
     const renderTodos = (project) => {
         todoListELem.innerHTML = '';
-        
+    
         project.getTodos().forEach((todo) => {
             const ul = document.createElement('ul');
             const li = document.createElement('li');
@@ -93,40 +95,47 @@ const uiController = () => {
             const todoRight = document.createElement('div');
             const date = document.createElement('span');
             const priority = document.createElement('span'); 
-
+            const checkbox = document.createElement('input');
+    
+            checkbox.type = 'checkbox';
+            checkbox.classList.add('todo-checkbox');
+    
             todoOptionsBtn.textContent = '⋮';
             todoEdit.textContent = 'Edit';
             todoDel.textContent = 'Delete';
-
+    
             todoOptions.classList.add('dropdown');
             todoOptionsBtn.classList.add('options-btn');
             todoOptions.classList.add('dropdown-menu');
             date.classList.add('date');
-            
+            todoEdit.classList.add('todo-edit-options-buttons');
+            todoDel.classList.add('todo-edit-options-buttons');
+            todoLeft.classList.add('todo-left');
+    
             todoOptions.appendChild(todoEdit);
             todoOptions.appendChild(todoDel);
-
+    
             todoOptions.style.display = 'none';
-
+    
             todoOptionsBtn.addEventListener('click', (e) => {
                 todoOptions.style.display = todoOptions.style.display == 'none' ? 'block' : 'none';
                 e.stopPropagation();
             });
-
+    
             document.addEventListener('click', (event) => {
                 if (event.target.closest != document.querySelector('.dropdown-menu') 
                 && event.target.closest != document.querySelector('.options-btn')) {
                     todoOptions.style.display = 'none';
                 }
             });
-
+    
             todoLeft.innerHTML = `  <div class="todo-heading">
                                     <div class="todo-title">${todo.title}</div>
                                     <div class="todo-description">${todo.description}</div>
                                     </div>`;
             priority.innerHTML = `${todo.priority}`;
             date.innerHTML = `${todo.dueDate}`;
-
+    
             if (todo.priority === 'low') {
                 priority.classList.add('priority-low');
             } else if (todo.priority === 'medium') {
@@ -134,35 +143,46 @@ const uiController = () => {
             } else if (todo.priority === 'high') {
                 priority.classList.add('priority-high');
             }
-
+    
             todoRight.appendChild(priority);
             todoRight.appendChild(date);
             todoRight.appendChild(todoOptionsBtn);
             
+            todoLeft.prepend(checkbox);
+    
             li.appendChild(todoLeft);
             li.appendChild(todoRight);
             li.appendChild(todoOptions);
+
+            checkbox.addEventListener('click', () => {
+                if (checkbox.checked) {
+                    todoLeft.classList.add('completed');
+                    todo.toggleCompleted(true);
+                } else {
+                    todoLeft.classList.remove('completed');
+                    todo.toggleCompleted(false); 
+                }
+            });
 
             todoDel.addEventListener('click', () => {
                 project.removeTodo(todo.title);
                 renderTodos(project);
             });
-
+    
             todoEdit.addEventListener('click', () => {
-                
                 editTodoModal.style.display = 'block'; 
-            
+    
                 editCloseBtn.addEventListener('click', () => {
                     editTodoModal.style.display = 'none';
                 });
-
-                 updateTodo(todo);
+    
+                updateTodo(todo);
             });
-
+    
             ul.appendChild(li);
             todoListELem.appendChild(ul);
         });
-    };
+    };    
 
     const addProjectListener = () => {
         addProjectBtn.addEventListener('click', () => {
@@ -236,6 +256,7 @@ const uiController = () => {
             const editPriority = editFormData.get('edit-priority');
     
             const updatedTodo = {
+                        id: todo.id,
                         title: editTitle,
                         description: editDescription,
                         dueDate: editDueDate,

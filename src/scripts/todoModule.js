@@ -1,6 +1,7 @@
 class Todo {
    
-    constructor (title,description, dueDate, priority, notes)  {
+    constructor (id, title,description, dueDate, priority)  {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
@@ -8,8 +9,8 @@ class Todo {
         this.completed = false;
     }
 
-    toggleCompleted() {
-        this.completed = !this.completed;
+    toggleCompleted(status) {
+        this.completed = status;
     }
 
     setDueDate(newDueDate) {

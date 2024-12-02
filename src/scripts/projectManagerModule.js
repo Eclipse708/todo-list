@@ -2,12 +2,13 @@ import Project from "./projectModule";
 
 const projectManager = (() => {
     let projects = [];
-    const defaultProject = new Project('Default');
+    const defaultProject = new Project(1, 'Default');
     projects.push(defaultProject);
     let currentProject = projects[0];
 
     const addProject = (name) => {
-        const newProject = new Project(name);
+        const projectId = getProjects().length + 1;
+        const newProject = new Project(projectId, name);
         projects.push(newProject);
     };
 
