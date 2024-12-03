@@ -1,8 +1,9 @@
 import projectManager from "./projectManagerModule";
+import Project from "./projectModule";
 
 const storageManager = () => {
 
-    const saveToLocalStorage = () => {
+    const saveToLocalStorage = () => {  
         const projects = projectManager.getProjects();
         localStorage.setItem('projects', JSON.stringify(projects));
     }
@@ -11,7 +12,14 @@ const storageManager = () => {
         const projects = localStorage.getItem('projects');
 
         if (projects) {
-            return JSON.parse(projects);
+            /**
+             * When dom is loaded, this method is initialized
+             * Map returns an array which is responsible for
+             * creating new instances of the Project class based
+             * on the ones saved in local storage, hence preserving
+             * their functionality
+             */
+            return JSON.parse(projects).map(project => new Project(project.name));
         } else {
             return [];
         }
@@ -23,8 +31,8 @@ const storageManager = () => {
         if (type === 'todo') {
             currentState.map((project) => {
                 project.todos = project.todos.map((todo) => {
-                    // identifies correct todo, title is used as id
-                    if (todo.title == updatedItem.title) {
+                    // identifies correct todo using id
+                    if (todo.id == updatedItem.id) {
                         // actual update happens here
                         const updatedTodo = {...todo, ...updatedItem}; 
                         return updatedTodo;
@@ -37,7 +45,7 @@ const storageManager = () => {
             });
         } else if (type === 'project') {
                 currentState.map((project) => {
-                    if (project.name == updatedItem.name) {
+                    if (project.id == updatedItem.id) {
                         const updatedProject = {...project, ...updatedItem};
                         return updatedProject;
                     }
@@ -49,23 +57,13 @@ const storageManager = () => {
         saveToLocalStorage();
     }
 
-    const generateId = (type) => {
-        const currentState = getFromLocalStorage();
-        if (type === 'todo') {
-            currentState.map((project) => {
-                project.todos  = project.todos.map((todo) => {
-                    
-                });
-            });
-        }
-    }
-
-    const init = () => {
-        saveToLocalStorage();
+    const initalizeLocalStorage = () => {
+        const projects = getFromLocalStorage();
     }
 
     return {
-        init,
+        initalizeLocalStorage,
+        saveToLocalStorage,
         getFromLocalStorage,
         updateLocalStorage,
     }

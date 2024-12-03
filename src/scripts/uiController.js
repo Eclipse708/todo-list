@@ -50,8 +50,8 @@ const uiController = () => {
             });
 
             document.addEventListener('click', (event) => {
-                if (event.target != document.querySelector('.project-options-dropdown-menu') &&
-                event.target != document.querySelector('.project-options-btn')) {
+                if (event.target != document.querySelector('.project-options-dropdown-menu') 
+                    && event.target != document.querySelector('.project-options-btn')) {
                     projectOptions.style.display = 'none';
                 }
             });
@@ -124,7 +124,7 @@ const uiController = () => {
     
             document.addEventListener('click', (event) => {
                 if (event.target.closest != document.querySelector('.dropdown-menu') 
-                && event.target.closest != document.querySelector('.options-btn')) {
+                    && event.target.closest != document.querySelector('.options-btn')) {
                     todoOptions.style.display = 'none';
                 }
             });

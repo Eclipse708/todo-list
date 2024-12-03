@@ -1,19 +1,27 @@
 import Project from "./projectModule";
+import storageManager from "./dataModule";
 
 const projectManager = (() => {
-    let projects = [];
-    const defaultProject = new Project(1, 'Default');
-    projects.push(defaultProject);
+    let projects = storageManager().getFromLocalStorage() || [];
+    
+    if (projects.length === 0) {
+        const defaultProject = new Project('Default');
+        projects.push(defaultProject);
+    }
+
     let currentProject = projects[0];
 
     const addProject = (name) => {
-        const projectId = getProjects().length + 1;
-        const newProject = new Project(projectId, name);
+        const newProject = new Project(name);
         projects.push(newProject);
+        
+        // update local storage
+        storageManager().saveToLocalStorage(projects);
     };
 
     const removeProject = (name) => {
         projects = projects.filter(project => project.name !== name);
+        storageManager().saveToLocalStorage(projects);
     };
 
     const renameProject = (baseProjectName, newProjectName) => {
@@ -26,6 +34,7 @@ const projectManager = (() => {
         // console.log(newProjectName)
         // console.log(baseProjectName)
         projects[projectIndex].name = newProjectName;
+        storageManager().saveToLocalStorage(projects);
     }
 
     const getProjects = () => projects;

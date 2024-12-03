@@ -1,15 +1,37 @@
 import Todo from "./todoModule";
+import storageManager from "./dataModule";
 class Project {
-    constructor (id, name) {
-        this.id = id;
+
+    constructor (name) {
+        this.id = this.generateId();
         this.name = name;
         this.todos = [];
     }
 
+    generateId() {
+        const currentProjects = storageManager().getFromLocalStorage();
+        let newId = 0;
+        
+        currentProjects.forEach((project) => {
+            if (project.id > newId) {
+                newId = project.id;
+            }
+        });
+
+        return newId + 1;
+    }
+
     addTodo(newTodo) {
-        const todoId = this.getTodos().length + 1;
-        const todo = new Todo(todoId, newTodo.title, newTodo.description, newTodo.dueDate, newTodo.priority);
+        // console.log(this.getTodos());
+        const todo = new Todo(newTodo.title, newTodo.description, newTodo.dueDate, newTodo.priority);
         this.todos.push(todo);
+
+        // const projects = StorageManager().getFromLocalStorage();
+        // projects.forEach((project) => {
+        //     project.todos.forEach((projectTodo) => {
+        //         // StorageManager().saveToLocalStorage();
+        //     });
+        // });
     }
 
     removeTodo(title) {
