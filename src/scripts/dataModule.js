@@ -19,43 +19,44 @@ const storageManager = () => {
              * on the ones saved in local storage, hence preserving
              * their functionality
              */
+            console.log('Fetched from local storage:', projects);
             return JSON.parse(projects).map(project => new Project(project.name));
         } else {
             return [];
         }
     }
 
-    const updateLocalStorage = (updatedItem, type = 'todo') => {
-        const currentState = getFromLocalStorage();
+    // const updateLocalStorage = (updatedItem, type = 'todo') => {
+    //     const currentState = getFromLocalStorage();
 
-        if (type === 'todo') {
-            currentState.map((project) => {
-                project.todos = project.todos.map((todo) => {
-                    // identifies correct todo using id
-                    if (todo.id == updatedItem.id) {
-                        // actual update happens here
-                        const updatedTodo = {...todo, ...updatedItem}; 
-                        return updatedTodo;
-                    }
+    //     if (type === 'todo') {
+    //         currentState.map((project) => {
+    //             project.todos = project.todos.map((todo) => {
+    //                 // identifies correct todo using id
+    //                 if (todo.id == updatedItem.id) {
+    //                     // actual update happens here
+    //                     const updatedTodo = {...todo, ...updatedItem}; 
+    //                     return updatedTodo;
+    //                 }
 
-                    return todo;
-                });
+    //                 return todo;
+    //             });
 
-                return project;
-            });
-        } else if (type === 'project') {
-                currentState.map((project) => {
-                    if (project.id == updatedItem.id) {
-                        const updatedProject = {...project, ...updatedItem};
-                        return updatedProject;
-                    }
+    //             return project;
+    //         });
+    //     } else if (type === 'project') {
+    //             currentState.map((project) => {
+    //                 if (project.id == updatedItem.id) {
+    //                     const updatedProject = {...project, ...updatedItem};
+    //                     return updatedProject;
+    //                 }
                     
-                    return project;
-            });
-        }
+    //                 return project;
+    //         });
+    //     }
 
-        saveToLocalStorage();
-    }
+    //     saveToLocalStorage();
+    // }
 
     const initalizeLocalStorage = () => {
         const projects = getFromLocalStorage();
@@ -65,7 +66,7 @@ const storageManager = () => {
         initalizeLocalStorage,
         saveToLocalStorage,
         getFromLocalStorage,
-        updateLocalStorage,
+        // updateLocalStorage,
     }
 }
 

@@ -50,12 +50,11 @@ const uiController = () => {
             });
 
             document.addEventListener('click', (event) => {
-                if (event.target != document.querySelector('.project-options-dropdown-menu') 
-                    && event.target != document.querySelector('.project-options-btn')) {
+                if (!projectOptions.contains(event.target) && event.target !== projectOptionsBtn) {
                     projectOptions.style.display = 'none';
                 }
             });
-
+            
             removeProjectBtn.addEventListener('click', () => {
                 ProjectManager.removeProject(project.name);
                 renderProjects();
@@ -72,8 +71,8 @@ const uiController = () => {
             projectContainer.appendChild(projectOptions);
 
             projectElem.addEventListener('click', () => {
-                ProjectManager.activeProject(project.name);
-                renderTodos(project);
+                const selectedProject = ProjectManager.activeProject(project.name);
+                renderTodos(selectedProject);
             });
 
             projectListElem.appendChild(projectContainer);
@@ -133,6 +132,7 @@ const uiController = () => {
                                     <div class="todo-title">${todo.title}</div>
                                     <div class="todo-description">${todo.description}</div>
                                     </div>`;
+
             priority.innerHTML = `${todo.priority}`;
             date.innerHTML = `${todo.dueDate}`;
     

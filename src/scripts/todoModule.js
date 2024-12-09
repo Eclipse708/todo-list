@@ -2,7 +2,7 @@ import storageManager from "./dataModule";
 
 class Todo {
    
-    constructor (title,description, dueDate, priority)  {
+    constructor (title, description, dueDate, priority)  {
         this.id = this.generateId();
         this.title = title;
         this.description = description;

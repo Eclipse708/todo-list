@@ -41,7 +41,11 @@ const projectManager = (() => {
 
     const activeProject = (projectName) => {
        const projectIndex = projects.findIndex(project => project.name === projectName);
-       currentProject = projects[projectIndex];
+       if (projectIndex !== -1) {
+            currentProject = projects[projectIndex];
+            storageManager().saveToLocalStorage(projects);
+        }
+        
        return currentProject;
     }
 
