@@ -110,6 +110,7 @@ const uiController = () => {
             todoEdit.classList.add('todo-edit-options-buttons');
             todoDel.classList.add('todo-edit-options-buttons');
             todoLeft.classList.add('todo-left');
+            todoRight.classList.add('todo-right');
     
             todoOptions.appendChild(todoEdit);
             todoOptions.appendChild(todoDel);

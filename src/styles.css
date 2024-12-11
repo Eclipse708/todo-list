@@ -12,18 +12,18 @@
     --font-black: #000;
     --font-light-gray: #aaa;
     --font-dark-gray: rgb(101, 101, 101);
+    --bg-light-gray: #dee1e4;
     --bg-light: #f4f4f4;
     --bg-dark: #2c3e50;
     --bg-lighter: #f1f1f1;
-    --primary-red: #e74c3c;
-    --primary-red-dark: #c0392b;
     --box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     --border-radius: 4px;
     --modal-bg: rgba(0, 0, 0, 0.5);
-    --modal-width: 50%;
+    --modal-width: 21%;
     --modal-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     --font-heading: "Roboto Mono", monospace;
     --font-description: "Inconsolata", serif;
+    --font-large: 30px;
 }
 
 * {
@@ -38,7 +38,7 @@ h2 {
 
 body {
     font-family: var(--font-description);
-    background-color: var(--bg-light);
+    background-color: #ecf0f1;
     color: #333;
 }
 
@@ -57,7 +57,7 @@ li {
 }
 
 button {
-    background-color: var(--primary-red);
+    background-color: var(--font-black);
     color: var(--font-white);
     padding: 10px;
     border: none;
@@ -69,7 +69,34 @@ button {
 }
 
 button:hover {
-    background-color: var(--primary-red-dark);
+    background-color: var(--bg-light-gray);
+    color: var(--font-black);
+    border: 1px solid var(--font-black);
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px 0px;
+    margin-bottom: 10px; */
+}
+
+.nav-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1560px;
+    height: 71px;
+}
+
+.nav-items p {
+    font-size: var(--font-large);
+    font-weight: var(--font-bold);
+}
+
+.parent-container {
+    display: flex;
+    justify-content: center;
 }
 
 .options-btn {
@@ -108,14 +135,18 @@ button:hover {
 
 .container {
     display: flex;
-    height: 100vh;
+    height: 90vh;
+    width: 1560px;
 }
 
 .sidebar {
-    background-color: var(--bg-dark);
-    color: var(--font-white);
+    background-color: var(--bg-light-gray);
+    color: var(--font-black);
     padding: 20px;
     width: 250px;
+    border: 1px solid black;
+    border-right-width: 4px;
+    border-left-width: 0;
 }
 
 .sidebar h2 {
@@ -129,6 +160,7 @@ button:hover {
     justify-content: space-between;
     padding: 10px;
     border: 1px solid #34495e;
+    margin-bottom: 10px;
 }
 
 .project-options-dropdown-menu {
@@ -146,11 +178,12 @@ button:hover {
     margin-top: 0;
     cursor: pointer;
     background: none !important;
-    color: var(--font-white);
+    color: var(--font-black);
 }
 
 .project-options-btn:hover {
     font-weight: var(--font-bold);
+    border: none;
 }
 
 .main-content {
@@ -281,7 +314,8 @@ form select {
 }
 
 .project-options-buttons:hover {
-    color: var(--font-white);
+    color: var(--font-black);
+    border: none;
 }
 
 .todo-checkbox {
@@ -312,8 +346,17 @@ form select {
     transform: translate(-50%, -50%);
 }
 
-.todo-left {
+.todo-left, 
+.todo-right {
     display: flex;
+}
+
+.todo-right {
+    align-items: center;
+}
+
+.todo-right > button:hover {
+    border: none;
 }
 
 .completed .todo-title,

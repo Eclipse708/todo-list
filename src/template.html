@@ -3,87 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Todo List</title>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <h2>Projects</h2>
-            <div id="project-list">
-            </div>
-            <div id="project-modal" class="modal">
-                <div class="modal-content">
-                <form id="project-form">
-                    <input type="text" id="title" name="title" placeholder="Enter Project Title" required>
-                    <div class="project-modal-btns">
-                        <button type="submit">Add</button>
-                        <button type="button" class="close-project-modal-btn">Close</button>
+    <div class="header">
+        <div class="nav-items">
+            <p>flow.</p>
+            <span class="material-symbols-outlined">
+                forest
+            </span>
+        </div>
+    </div>
+    <div class="parent-container">
+        <div class="container">
+            <aside class="sidebar">
+                <h2>Projects</h2>
+                <div id="project-list">
+                </div>
+                <div id="project-modal" class="modal">
+                    <div class="modal-content">
+                    <form id="project-form">
+                        <input type="text" id="title" name="title" placeholder="Enter Project Title" required>
+                        <div class="project-modal-btns">
+                            <button type="submit">Add</button>
+                            <button type="button" class="close-project-modal-btn">Close</button>
+                        </div>
+                    </form>
                     </div>
-                </form>
                 </div>
-            </div>
-            <button id="add-project">Add Project</button>
-        </aside>
+                <button id="add-project">Add Project</button>
+            </aside>
 
-        <main class="main-content">
-            <h2>Todos</h2>
-            <div id="todo-list">
-            </div>
-
-            <div id="todo-modal" class="modal">
-                <div class="modal-content">
-                <span class="close-button">&times;</span>
-                <h2>Add a New Todo</h2>
-                <form id="todo-form">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" required>
-            
-                    <label for="description">Description:</label>
-                    <textarea id="description" name="description"></textarea>
-            
-                    <label for="due-date">Due Date:</label>
-                    <input type="date" id="due-date" name="due-date" required>
-            
-                    <label for="priority">Priority:</label>
-                    <select id="priority" name="priority" required>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                    </select>
-                    
-                    <button type="submit">Add</button>
-                </form>
+            <main class="main-content">
+                <h2>Todos</h2>
+                <div id="todo-list">
                 </div>
-            </div>
 
-            <div id="edit-todo-modal" class="modal">
-                <div class="modal-content">
-                <span class="edit-close-button">&times;</span>
-                <h2>Edit Todo</h2>
-                <form id="edit-todo-form">
-                    <label for="title">Title:</label>
-                    <input type="text" id="edit-title" name="edit-title" required>
-            
-                    <label for="description">Description:</label>
-                    <textarea id="edit-description" name="edit-description"></textarea>
-            
-                    <label for="due-date">Due Date:</label>
-                    <input type="date" id="edit-due-date" name="edit-due-date" required>
-            
-                    <label for="priority">Priority:</label>
-                    <select id="edit-priority" name="edit-priority" required>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                    </select>
-                    
-                    <button type="submit">Add</button>
-                </form>
+                <div id="todo-modal" class="modal">
+                    <div class="modal-content">
+                    <span class="close-button">&times;</span>
+                    <h2>Add a New Todo</h2>
+                    <form id="todo-form">
+                        <label for="title">Title:</label>
+                        <input type="text" id="title" name="title" required>
+                
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description"></textarea>
+                
+                        <label for="due-date">Due Date:</label>
+                        <input type="date" id="due-date" name="due-date" required>
+                
+                        <label for="priority">Priority:</label>
+                        <select id="priority" name="priority" required>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        </select>
+                        
+                        <button type="submit">Add</button>
+                    </form>
+                    </div>
                 </div>
-            </div>
 
-            <button id="add-todo">Add Todo</button>
-        </main>
+                <div id="edit-todo-modal" class="modal">
+                    <div class="modal-content">
+                    <span class="edit-close-button">&times;</span>
+                    <h2>Edit Todo</h2>
+                    <form id="edit-todo-form">
+                        <label for="title">Title:</label>
+                        <input type="text" id="edit-title" name="edit-title" required>
+                
+                        <label for="description">Description:</label>
+                        <textarea id="edit-description" name="edit-description"></textarea>
+                
+                        <label for="due-date">Due Date:</label>
+                        <input type="date" id="edit-due-date" name="edit-due-date" required>
+                
+                        <label for="priority">Priority:</label>
+                        <select id="edit-priority" name="edit-priority" required>
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        </select>
+                        
+                        <button type="submit">Add</button>
+                    </form>
+                    </div>
+                </div>
+
+                <button id="add-todo">Add Todo</button>
+            </main>
+        </div>
     </div>
 </body>
 </html>
