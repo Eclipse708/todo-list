@@ -26,6 +26,33 @@
     --font-large: 30px;
 }
 
+.dark-mode {
+    --muave: #cfa8b8;
+    --lavender: #a36cb2;
+    --deep-purple: #18111b;
+    --orchid: #5a2e51;
+    --border-dark: #2b3844;
+    --font-bold: 600;
+    --font-sm: 14px;
+    --font-white: #fff;
+    --font-black: #000;
+    --font-light-gray: #bbb;
+    --font-dark-gray: rgb(150, 150, 150);
+    --bg-light-gray: #3c4a54;
+    --bg-black: #0d0d0d;
+    --bg-dark-gray: #171717;
+    --bg-gray: #212121;
+    --bg-lighter: #4a5561;
+    --box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.1);
+    --border-radius: 4px;
+    --modal-bg: rgba(255, 255, 255, 0.2);
+    --modal-width: 21%;
+    --modal-box-shadow: 0 5px 15px rgba(51, 50, 50, 0.2);
+    --font-heading: "Roboto Mono", monospace;
+    --font-description: "Inconsolata", serif;
+    --font-large: 30px;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -40,6 +67,7 @@ body {
     font-family: var(--font-description);
     background-color: #ecf0f1;
     color: #333;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 ul {
@@ -363,4 +391,80 @@ form select {
 .completed .todo-description {
     text-decoration: line-through;
     color: var(--font-dark-gray);
+}
+
+.dark-mode {
+    background-color: var(--bg-gray);
+    color: var(--font-white);
+}
+
+.dark-mode .main-content {
+    background-color: var(--bg-black);
+}
+
+.dark-mode li {
+    border-color: var(--bg-light);
+}
+
+.dark-mode button {
+    background-color: var(--font-white);
+    color: var(--font-black);
+}
+
+.dark-mode button:hover {
+    background-color: var(--bg-black);
+    color: var(--font-white);
+    border: 1px solid var(--font-white);
+}
+
+.dark-mode .sidebar {
+    background-color: var(--bg-dark-gray);
+    color: var(--font-white);
+    border-color: var(--font-white);
+}
+
+.dark-mode .dropdown-menu,
+.dark-mode .project-options-dropdown-menu {
+    background-color: var(--bg-lighter);
+}
+
+.dark-mode .todo-checkbox {
+    background-color: var(--bg-light);
+}
+
+.dark-mode .todo-checkbox:checked {
+    background-color: var(--orchid);
+    border-color: var(--orchid);
+}
+
+.dark-mode .project-container {
+    border: 1px solid var(--font-white);
+}
+
+.dark-mode .project-options-btn {
+    color: var(--font-white);
+}
+
+.dark-mode .project-options-btn:hover,
+.dark-mode .options-btn:hover {
+    border: none;
+}
+
+.dark-mode .modal {
+    background-color: rgba(64, 64, 64, 0.2);
+}
+
+.dark-mode .modal-content {
+    background-color: var(--bg-black);
+}
+
+.dark-mode .options-btn {
+    color: var(--bg-light);
+    background-color: var(--bg-black);
+}
+
+
+
+#toggle-btn {
+    cursor: pointer;
 }

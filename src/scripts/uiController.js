@@ -15,7 +15,19 @@ const uiController = () => {
     const todoForm = document.querySelector('#todo-form');
     const projectForm = document.querySelector('#project-form');
     const editTodoForm = document.querySelector('#edit-todo-form');
+    const toggleButton = document.querySelector('#toggle-btn');
+    const body = document.body;
 
+    const toggleMode = () => {
+        toggleButton.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+            } else {
+                body.classList.add('dark-mode');
+            }
+        });
+    }
+    
     const renderProjects = () => {
         const projects = ProjectManager.getProjects();
         projectListElem.innerHTML = '';
@@ -240,7 +252,7 @@ const uiController = () => {
         project.addTodo(newTodo);
         renderTodos(project);
         modal.style.display = 'none';
-        // todoForm.reset(); //resets values in modal
+        todoForm.reset(); //resets values in modal
         });
     }
 
@@ -267,7 +279,7 @@ const uiController = () => {
             project.editTodo(todo, updatedTodo);
             renderTodos(project);
             editTodoModal.style.display = 'none';
-            // todoForm.reset(); //resets values in modal
+            todoForm.reset(); //resets values in modal
         });
     }
 
@@ -277,6 +289,7 @@ const uiController = () => {
         addTodoListener();
         addTodoItemListener();
         addProjectItemListener();
+        toggleMode();
     }
 
     return {
